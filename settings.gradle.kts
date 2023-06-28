@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MyDroidGitExp"
 include(":app")
+include(":core-model")

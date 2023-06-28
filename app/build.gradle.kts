@@ -24,6 +24,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    kotlin {
+        sourceSets.configureEach {
+            kotlin.srcDir("$buildDir/generated/ksp/$name/kotlin/")
+        }
+    }
 }
 
 dependencies {
