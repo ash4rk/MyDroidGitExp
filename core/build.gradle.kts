@@ -20,6 +20,12 @@ dependencies {
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     api("com.jakewharton.timber:timber:5.0.1")
 
-    // Hilt
+    // hilt
     implementation("com.google.dagger:hilt-android:2.45")
+
+    // database
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
+    ksp("androidx.room:room-compiler:2.5.2")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 }
