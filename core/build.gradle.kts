@@ -15,9 +15,6 @@ android {
     defaultConfig {
         minSdk = Configuration.MIN_SDK
         targetSdk = Configuration.TARGET_SDK
-        // The schemas directory contains a schema file for each version of the Room database.
-        // This is required to enable Room auto migrations.
-        // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
@@ -59,7 +56,4 @@ dependencies {
     // logger
     api("com.jakewharton.timber:timber:${Versions.TIMBER}")
 
-    // tests
-    //implementation("junit:junit:4.12")
-    //implementation("org.junit.jupiter:junit-jupiter")
 }

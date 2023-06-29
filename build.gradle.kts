@@ -1,12 +1,5 @@
 plugins {
     id("com.diffplug.spotless") version "6.7.2"
-/*
-    id("com.android.application") version Versions.ANDROID_GRADLE_PLUGIN apply false
-    id("com.android.library") version Versions.ANDROID_GRADLE_PLUGIN apply false
-    id("org.jetbrains.kotlin.android") version Versions.KOTLIN apply false
-    id("com.google.devtools.ksp") version Versions.KSP apply false
-    id("com.google.dagger.hilt.android") version Versions.HILT apply false
-*/
 }
 buildscript {
 
@@ -40,7 +33,7 @@ subprojects {
             target("**/*.kt")
             targetExclude("$buildDir/**/*.kt")
             ktlint().setUseExperimental(true).editorConfigOverride(
-                kotlin.collections.mapOf(
+                mapOf(
                     "indent_size" to "2",
                     "continuation_indent_size" to "2"
                 )
