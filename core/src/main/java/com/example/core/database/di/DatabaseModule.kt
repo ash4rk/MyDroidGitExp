@@ -33,7 +33,7 @@ internal object DatabaseModule {
         typeResponseConverter: TypeResponseConverter
     ): UserDatabase {
         return Room
-            .databaseBuilder(application, UserDatabase::class.java, "Pokedex.db")
+            .databaseBuilder(application, UserDatabase::class.java, "GitHub.db")
             .fallbackToDestructiveMigration()
             .addTypeConverter(typeResponseConverter)
             .build()
@@ -41,7 +41,7 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providePokemonDao(appDatabase: UserDatabase): UserDao {
+    fun provideUserDao(appDatabase: UserDatabase): UserDao {
         return appDatabase.userDao()
     }
 

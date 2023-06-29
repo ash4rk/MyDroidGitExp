@@ -28,4 +28,12 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // network
+    implementation("com.github.skydoves:sandwich:1.3.5")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 }

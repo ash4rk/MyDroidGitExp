@@ -10,7 +10,7 @@ import com.example.core.database.entity.UserEntity
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUserList(pokemonList: List<UserEntity>)
+    suspend fun insertUserList(userList: List<UserEntity>)
 
     @Query("SELECT * FROM UserEntity WHERE page = :page_")
     suspend fun getUserList(page_: Int): List<UserEntity>

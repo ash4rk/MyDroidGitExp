@@ -3,7 +3,7 @@ package com.example.core.database.entity.mapper
 import com.example.core.database.entity.UserEntity
 import com.example.core.model.User
 
-object PokemonEntityMapper : EntityMapper<List<User>, List<UserEntity>> {
+object UserEntityMapper : EntityMapper<List<User>, List<UserEntity>> {
 
     override fun asEntity(domain: List<User>): List<UserEntity> {
         return domain.map { user ->
@@ -29,9 +29,9 @@ object PokemonEntityMapper : EntityMapper<List<User>, List<UserEntity>> {
 }
 
 fun List<User>.asEntity(): List<UserEntity> {
-    return PokemonEntityMapper.asEntity(this)
+    return UserEntityMapper.asEntity(this)
 }
 
 fun List<UserEntity>.asDomain(): List<User> {
-    return PokemonEntityMapper.asDomain(this)
+    return UserEntityMapper.asDomain(this)
 }
