@@ -3,28 +3,34 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk = 32
     namespace = "com.example.mydroidgitexp"
 
+    compileSdk = Configuration.COMPILE_SDK
     defaultConfig {
         applicationId = "com.example.mydroidgitexp"
-        minSdk = 23
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = Configuration.MIN_SDK
+        targetSdk = Configuration.TARGET_SDK
+        versionCode = Configuration.VERSION_CODE
+        versionName = Configuration.VERSION_NAME
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner = "com.example.mydroidgitexp.AppTestRunner"
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
     }
 
     kotlin {
@@ -32,20 +38,49 @@ android {
             kotlin.srcDir("$buildDir/generated/ksp/$name/kotlin/")
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+
+    buildTypes {
+        create("benchmark") {
+            isDebuggable = true
+            signingConfig = getByName("debug").signingConfig
+            matchingFallbacks += listOf("release")
+        }
+    }
+
+    lint {
+        abortOnError = false
+    }
 }
 
 dependencies {
+    // modules
+    implementation(project(mapOf("path" to ":core")))
+
+    // androidx
+    implementation("com.google.android.material:material:${Versions.MATERIAL}")
+    implementation("androidx.fragment:fragment-ktx:${Versions.ANDROIDX_FRAGMENT}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.startup:startup-runtime:${Versions.ANDROIDX_STARTUP}")
+
+    // data binding
+    implementation("com.github.skydoves:bindables:${Versions.BINDABLES}")
 
     // di
-    implementation("com.google.dagger:hilt-android")
-    kapt("com.google.dagger:hilt-compiler")
-    androidTestImplementation("com.google.dagger:hilt-android-testing")
-    kaptAndroidTest("com.google.dagger:hilt-compiler")
+    implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:${Versions.HILT}")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:${Versions.HILT}")
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}")
+
 }

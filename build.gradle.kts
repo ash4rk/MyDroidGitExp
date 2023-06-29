@@ -1,14 +1,15 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.diffplug.spotless") version "6.14.0" apply false
-    id("com.android.application") version "8.0.2" apply false
-    id("com.android.library") version "8.0.2" apply false
-    id("org.jetbrains.kotlin.android") version "1.6.10" apply false
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
+    id("com.diffplug.spotless") version "6.7.2"
+/*
+    id("com.android.application") version Versions.ANDROID_GRADLE_PLUGIN apply false
+    id("com.android.library") version Versions.ANDROID_GRADLE_PLUGIN apply false
+    id("org.jetbrains.kotlin.android") version Versions.KOTLIN apply false
+    id("com.google.devtools.ksp") version Versions.KSP apply false
+    id("com.google.dagger.hilt.android") version Versions.HILT apply false
+*/
 }
-
 buildscript {
+
     repositories {
         mavenCentral()
         google()
@@ -16,11 +17,12 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")
+        classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}")
     }
 }
+
 
 subprojects {
     apply(plugin = "com.diffplug.spotless")

@@ -1,39 +1,65 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp") version Versions.KSP
 }
 
 android {
+
     namespace = "com.example.mydroidgitexp.core"
-    compileSdk = 33
+    compileSdk = Configuration.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = Configuration.MIN_SDK
+        targetSdk = Configuration.TARGET_SDK
+        // The schemas directory contains a schema file for each version of the Room database.
+        // This is required to enable Room auto migrations.
+        // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
+
+    sourceSets.getByName("test") {
+        assets.srcDir(files("$projectDir/schemas"))
     }
 }
 
 dependencies {
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
-    api("com.jakewharton.timber:timber:5.0.1")
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES}")
 
-    // hilt
-    implementation("com.google.dagger:hilt-android:2.45")
+    // di
+    implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
     // database
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    implementation("androidx.room:room-runtime:${Versions.ANDROIDX_ROOM}")
+    implementation("androidx.room:room-ktx:${Versions.ANDROIDX_ROOM}")
+    ksp("androidx.room:room-compiler:${Versions.ANDROIDX_ROOM}")
+    testImplementation("androidx.arch.core:core-testing:${Versions.ANDROIDX_ARCH_CORE}")
 
     // network
-    implementation("com.github.skydoves:sandwich:1.3.5")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    implementation("com.github.skydoves:sandwich:${Versions.SANDWICH}")
+    implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
+    implementation("com.squareup.retrofit2:converter-moshi:${Versions.RETROFIT}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}")
+    testImplementation("com.squareup.okhttp3:mockwebserver:${Versions.OKHTTP}")
+    testImplementation("androidx.arch.core:core-testing:${Versions.ANDROIDX_ARCH_CORE}")
+
+    // json parsing
+    implementation("com.squareup.moshi:moshi-kotlin:${Versions.MOSHI}")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:${Versions.MOSHI}")
+
+    // logger
+    api("com.jakewharton.timber:timber:${Versions.TIMBER}")
+
+    // tests
+    //implementation("junit:junit:4.12")
+    //implementation("org.junit.jupiter:junit-jupiter")
 }

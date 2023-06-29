@@ -1,5 +1,6 @@
 package com.example.core.data.repository
 
+import androidx.annotation.VisibleForTesting
 import androidx.annotation.WorkerThread
 import com.example.core.database.UserDao
 import com.example.core.database.entity.mapper.asDomain
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
+@VisibleForTesting
 class MainRepositoryImpl @Inject constructor(
     private val githubClient: GitHubClient,
     private val userDao: UserDao,
