@@ -1,8 +1,11 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 dependencyResolutionManagement {
@@ -10,8 +13,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 rootProject.name = "MyDroidGitExp"
 include(":app")
-include(":core-model")
+include(":core")

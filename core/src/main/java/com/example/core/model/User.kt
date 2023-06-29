@@ -1,4 +1,4 @@
-package com.example.core_model
+package com.example.core.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
