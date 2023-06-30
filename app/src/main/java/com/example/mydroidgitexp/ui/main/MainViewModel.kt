@@ -33,7 +33,10 @@ class MainViewModel @Inject constructor(
             page = page,
             onStart = { isLoading = true },
             onComplete = { isLoading = false },
-            onError = { toastMessage = it }
+            onError = {
+                toastMessage = it
+                Timber.d(it)
+            }
         )
     }
 

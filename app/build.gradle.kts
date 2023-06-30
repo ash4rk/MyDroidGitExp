@@ -83,4 +83,18 @@ dependencies {
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}")
 
+    // recyclerView
+    implementation("androidx.recyclerview:recyclerview:${Versions.RECYCLER_VIEW}")
+    implementation("com.github.skydoves:baserecyclerviewadapter:${Versions.BASE_ADAPTER}")
+
+    // whatIf
+    implementation("com.github.skydoves:whatif:${Versions.WHAT_IF}")
+
+    // glide
+    implementation("com.github.bumptech.glide:glide:${Versions.GLIDE}")
+    implementation("com.github.florent37:glidepalette:${Versions.GLIDE_PALETTE}")
+
+    // custom views
+    implementation("com.github.skydoves:androidribbon:${Versions.ANDROID_RIBBON}")
+    implementation("com.github.skydoves:progressview:${Versions.PROGRESS_VIEW}")
 }

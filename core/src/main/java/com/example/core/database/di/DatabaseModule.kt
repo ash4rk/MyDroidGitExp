@@ -1,9 +1,7 @@
 package com.example.core.database.di
 
 import android.app.Application
-import android.service.autofill.UserData
 import androidx.room.Room
-import com.example.core.database.TypeResponseConverter
 import com.example.core.database.UserDao
 import com.example.core.database.UserDatabase
 import com.squareup.moshi.Moshi
@@ -30,12 +28,10 @@ internal object DatabaseModule {
     @Singleton
     fun provideAppDatabase(
         application: Application,
-        typeResponseConverter: TypeResponseConverter
     ): UserDatabase {
         return Room
             .databaseBuilder(application, UserDatabase::class.java, "GitHub.db")
             .fallbackToDestructiveMigration()
-            .addTypeConverter(typeResponseConverter)
             .build()
     }
 
@@ -43,11 +39,5 @@ internal object DatabaseModule {
     @Singleton
     fun provideUserDao(appDatabase: UserDatabase): UserDao {
         return appDatabase.userDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideTypeResponseConverter(moshi: Moshi): TypeResponseConverter {
-        return TypeResponseConverter(moshi)
     }
 }

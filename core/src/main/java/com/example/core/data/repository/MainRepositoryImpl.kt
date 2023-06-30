@@ -5,6 +5,7 @@ import androidx.annotation.WorkerThread
 import com.example.core.database.UserDao
 import com.example.core.database.entity.mapper.asDomain
 import com.example.core.database.entity.mapper.asEntity
+import com.example.core.model.User
 import com.example.core.network.Dispatcher
 import com.example.core.network.GitHubAppDispatchers
 import com.example.core.network.service.GitHubClient
@@ -36,7 +37,7 @@ class MainRepositoryImpl @Inject constructor(
         if (users.isEmpty()) {
             val response = githubClient.fetchUserList(page = page)
             response.suspendOnSuccess {
-                users = data.results
+                users = data
                 users.forEach { user -> user.page = page }
                 userDao.insertUserList(users.asEntity())
                 emit(userDao.getAllUserList(page).asDomain())

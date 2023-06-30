@@ -10,8 +10,6 @@ import com.example.core.database.entity.UserEntity
     version = 2,
     exportSchema = true
 )
-@TypeConverters(value = [TypeResponseConverter::class])
 abstract class UserDatabase : RoomDatabase() {
-
     abstract fun userDao(): UserDao
 }

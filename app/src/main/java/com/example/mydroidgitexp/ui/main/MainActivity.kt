@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import com.example.mydroidgitexp.R
+import com.example.mydroidgitexp.adapters.UserAdapter
 import com.example.mydroidgitexp.databinding.ActivityMainBinding
 import com.skydoves.bindables.BindingActivity
 
@@ -17,6 +18,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding {
+            adapter = UserAdapter()
+            vm = viewModel
+        }
     }
 }

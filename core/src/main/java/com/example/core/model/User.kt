@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @JsonClass(generateAdapter = true)
 data class User(
     var page: Int = 0,
-    @field:Json(name = "name")
+    @field:Json(name = "login")
     val name: String,
     @field:Json(name = "url") val url: String,
     @field:Json(name = "avatar_url") val avatarUrl: String

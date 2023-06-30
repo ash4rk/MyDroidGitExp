@@ -28,6 +28,7 @@ object Versions {
     const val ANDROID_RIBBON = "1.0.4"
     const val SPOTLESS = "6.7.2"
     const val TIMBER = "5.0.1"
+    const val PROGRESS_VIEW = "1.1.3"
 }
 
 object Configuration {
