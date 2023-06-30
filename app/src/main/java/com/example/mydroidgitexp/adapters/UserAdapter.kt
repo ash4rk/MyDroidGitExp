@@ -1,6 +1,5 @@
 package com.example.mydroidgitexp.adapters
 
-import android.os.SystemClock
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
