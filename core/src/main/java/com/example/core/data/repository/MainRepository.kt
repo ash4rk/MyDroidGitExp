@@ -13,4 +13,13 @@ interface MainRepository {
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ): Flow<List<User>>
+
+    @WorkerThread
+    fun fetchSearchUserList(
+        page: Int,
+        query: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<List<User>>
 }

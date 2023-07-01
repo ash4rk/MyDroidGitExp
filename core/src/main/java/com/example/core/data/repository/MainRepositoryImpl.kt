@@ -13,6 +13,7 @@ import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
@@ -38,6 +39,30 @@ class MainRepositoryImpl @Inject constructor(
             val response = githubClient.fetchUserList(page = page)
             response.suspendOnSuccess {
                 users = data
+                users.forEach { user -> user.page = page }
+                userDao.insertUserList(users.asEntity())
+                emit(userDao.getAllUserList(page).asDomain())
+            }.onFailure { // handles the all error cases from the API request fails.
+                onError(message())
+            }
+        } else {
+            emit(userDao.getAllUserList(page).asDomain())
+        }
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+
+    @WorkerThread
+    override fun fetchSearchUserList(
+        page: Int,
+        query: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<List<User>> = flow {
+        var users = userDao.getSearchUserList(query, page).asDomain()
+        if (users.isEmpty()) {
+            val response = githubClient.fetchSearchUserList(query = query, page = page)
+            response.suspendOnSuccess {
+                users = data.items
                 users.forEach { user -> user.page = page }
                 userDao.insertUserList(users.asEntity())
                 emit(userDao.getAllUserList(page).asDomain())
