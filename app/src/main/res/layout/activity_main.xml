@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -15,41 +16,66 @@
             type="com.example.mydroidgitexp.adapters.UserAdapter" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#2B292C">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:fadeScrollbars="false"
-        android:padding="6dp"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        app:adapter="@{adapter}"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:paginationUserList="@{vm}"
-        app:spanCount="1"
-        app:submitList="@{vm.userList}"
-        app:toast="@{vm.toastMessage}"
-        tools:listitem="@layout/item_user" />
+        android:fitsSystemWindows="true">
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:padding="6dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:paginationUserList="@{vm}"
+            app:spanCount="1"
+            app:submitList="@{vm.userList}"
+            app:toast="@{vm.toastMessage}"
+            tools:listitem="@layout/item_user" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </layout>
