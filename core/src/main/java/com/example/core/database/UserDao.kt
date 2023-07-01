@@ -18,9 +18,4 @@ interface UserDao {
     @Query("SELECT * FROM UserEntity WHERE page <= :page_")
     suspend fun getAllUserList(page_: Int): List<UserEntity>
 
-    @Query("SELECT * FROM UserEntity WHERE name LIKE '%' || :query_ || '%' AND page = :page_")
-    suspend fun getSearchUserList(query_: String, page_: Int): List<UserEntity>
-
-    @Query("DELETE FROM UserEntity")
-    suspend fun clearUserTable()
 }

@@ -2,9 +2,11 @@ package com.example.core.data.repository
 
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.WorkerThread
+import com.example.core.database.SearchUserDao
 import com.example.core.database.UserDao
 import com.example.core.database.entity.mapper.asDomain
 import com.example.core.database.entity.mapper.asEntity
+import com.example.core.database.entity.mapper.asSearchEntity
 import com.example.core.model.User
 import com.example.core.network.Dispatcher
 import com.example.core.network.GitHubAppDispatchers
@@ -24,6 +26,7 @@ import javax.inject.Inject
 class MainRepositoryImpl @Inject constructor(
     private val githubClient: GitHubClient,
     private val userDao: UserDao,
+    private val searchUserDao: SearchUserDao,
     @Dispatcher(GitHubAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : MainRepository {
 
@@ -58,19 +61,23 @@ class MainRepositoryImpl @Inject constructor(
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ): Flow<List<User>> = flow {
-        var users = userDao.getSearchUserList(query, page).asDomain()
+        if (query != SearchUserDao.last_query) {
+            searchUserDao.clearSearchUserTable()
+            SearchUserDao.last_query = query
+        }
+        var users = searchUserDao.getSearchUserList(query, page).asDomain()
         if (users.isEmpty()) {
             val response = githubClient.fetchSearchUserList(query = query, page = page)
             response.suspendOnSuccess {
                 users = data.items
                 users.forEach { user -> user.page = page }
-                userDao.insertUserList(users.asEntity())
-                emit(userDao.getAllUserList(page).asDomain())
+                searchUserDao.insertSearchUserList(users.asSearchEntity())
+                emit(searchUserDao.getAllSearchUserList(page).asDomain())
             }.onFailure { // handles the all error cases from the API request fails.
                 onError(message())
             }
         } else {
-            emit(userDao.getAllUserList(page).asDomain())
+            emit(searchUserDao.getAllSearchUserList(page).asDomain())
         }
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
 }

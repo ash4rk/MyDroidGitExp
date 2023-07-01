@@ -2,6 +2,7 @@ package com.example.core.database.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.core.database.SearchUserDao
 import com.example.core.database.UserDao
 import com.example.core.database.UserDatabase
 import com.squareup.moshi.Moshi
@@ -39,5 +40,11 @@ internal object DatabaseModule {
     @Singleton
     fun provideUserDao(appDatabase: UserDatabase): UserDao {
         return appDatabase.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUserDao(appDatabase: UserDatabase): SearchUserDao {
+        return appDatabase.searchUserDao()
     }
 }
