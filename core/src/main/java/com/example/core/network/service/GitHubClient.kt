@@ -13,8 +13,8 @@ class GitHubClient @Inject constructor(
         page: Int
     ): ApiResponse<List<User>> =
         githubService.fetchUserList(
-            limit = PAGING_SIZE,
-            offset = page * PAGING_SIZE
+            per_page = PAGING_SIZE,
+            since = page * PAGING_SIZE
         )
 
     suspend fun fetchSearchUserList(

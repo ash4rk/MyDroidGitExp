@@ -10,8 +10,8 @@ interface  GitHubService {
 
     @GET("users")
     suspend fun fetchUserList(
-        @Query("limit") limit: Int = 30,
-        @Query("offset") offset: Int = 0
+        @Query("since") since: Int = 0,
+        @Query("per_page") per_page: Int = 30
     ): ApiResponse<List<User>>
 
 
