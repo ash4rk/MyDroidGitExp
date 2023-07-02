@@ -19,6 +19,7 @@ package com.example.mydroidgitexp.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydroidgitexp.ui.main.MainViewModel
+import com.example.mydroidgitexp.ui.users.UsersViewModel
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.bindables.BindingListAdapter
 import com.skydoves.whatif.whatIfNotNullAs
@@ -43,7 +44,7 @@ object RecyclerViewBinding {
 
   @JvmStatic
   @BindingAdapter("paginationUserList")
-  fun paginationUserList(view: RecyclerView, viewModel: MainViewModel) {
+  fun paginationUserList(view: RecyclerView, viewModel: UsersViewModel) {
     RecyclerViewPaginator(
       recyclerView = view,
       isLoading = { viewModel.isLoading },

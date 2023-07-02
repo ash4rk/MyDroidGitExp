@@ -12,6 +12,8 @@ object Versions {
     const val ANDROIDX_ROOM = "2.5.0"
     const val ANDROIDX_ARCH_CORE = "2.1.0"
     const val ANDROIDX_STARTUP = "1.1.1"
+    const val ANDROIDX_NAVIGATION_FRAGMENT = "2.4.1"
+    const val ANDROIDX_NAVIGATION_UI = "2.4.1"
     const val BINDABLES = "1.1.0"
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.10.0"

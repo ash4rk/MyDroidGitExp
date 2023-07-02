@@ -68,6 +68,8 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:${Versions.ANDROIDX_FRAGMENT}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.startup:startup-runtime:${Versions.ANDROIDX_STARTUP}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.ANDROIDX_NAVIGATION_FRAGMENT}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.ANDROIDX_NAVIGATION_UI}")
 
     // data binding
     implementation("com.github.skydoves:bindables:${Versions.BINDABLES}")

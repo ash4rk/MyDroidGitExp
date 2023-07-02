@@ -2,41 +2,55 @@ package com.example.mydroidgitexp.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.mydroidgitexp.R
-import com.example.mydroidgitexp.adapters.UserAdapter
 import com.example.mydroidgitexp.databinding.ActivityMainBinding
 import com.skydoves.bindables.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main), NavigationHost {
 
-    internal val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
+
+    private lateinit var navController: NavController
+    private lateinit var navHostFragment: NavHostFragment
+    private var currentNavId = NAV_ID_NONE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding {
-            adapter = UserAdapter()
             vm = viewModel
         }
 
-        binding.toolbar.run {
-            inflateMenu(R.menu.main_menu)
-            setOnMenuItemClickListener { item ->
-                if (item.itemId == R.id.search) {
-                    Timber.d("Navigate to Search")
-                    openSearch()
-                    true
-                } else {
-                    false
-                }
-            }
+        setContentView(binding.root)
+
+        navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            currentNavId = destination.id
+        }
+
+        if (savedInstanceState == null) {
+            currentNavId = navController.graph.startDestinationId
+            val requestedNavId = intent.getIntExtra(EXTRA_NAVIGATION_ID, currentNavId)
+            navigateTo(requestedNavId)
         }
     }
-}
 
-private fun openSearch() {
-    // TODO: navigate via NavController
-    return
+    private fun navigateTo(navId: Int) {
+        if (navId == currentNavId) {
+            return
+        }
+        navController.navigate(navId)
+    }
+
+    companion object {
+        const val EXTRA_NAVIGATION_ID = "extra.NAVIGATION_ID"
+        private const val NAV_ID_NONE = -1
+    }
 }
