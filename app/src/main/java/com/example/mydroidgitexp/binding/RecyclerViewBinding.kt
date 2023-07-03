@@ -19,6 +19,7 @@ package com.example.mydroidgitexp.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydroidgitexp.ui.main.MainViewModel
+import com.example.mydroidgitexp.ui.search.SearchViewModel
 import com.example.mydroidgitexp.ui.users.UsersViewModel
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.bindables.BindingListAdapter
@@ -45,6 +46,19 @@ object RecyclerViewBinding {
   @JvmStatic
   @BindingAdapter("paginationUserList")
   fun paginationUserList(view: RecyclerView, viewModel: UsersViewModel) {
+    RecyclerViewPaginator(
+      recyclerView = view,
+      isLoading = { viewModel.isLoading },
+      loadMore = { viewModel.fetchNextUserList() },
+      onLast = { false }
+    ).run {
+      threshold = 8
+    }
+  }
+
+  @JvmStatic
+  @BindingAdapter("paginationSearchUserList")
+  fun paginationSearchUserList(view: RecyclerView, viewModel: SearchViewModel) {
     RecyclerViewPaginator(
       recyclerView = view,
       isLoading = { viewModel.isLoading },

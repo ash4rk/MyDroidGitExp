@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="navigation_users" type="id" />
+    <item name="navigation_search" type="id" />
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.mydroidgitexp.R
 import com.example.mydroidgitexp.adapters.UserAdapter
 import com.example.mydroidgitexp.databinding.FragmentUsersBinding
@@ -38,7 +39,6 @@ class UsersFragment : BindingFragment<FragmentUsersBinding>(R.layout.fragment_us
     }
 
     private fun openSearch() {
-        // TODO: navigate via NavController
-        //NavHostFragment.findNavController().navigate(SearchFragmentDirections.toSearch())
+        findNavController().navigate(UsersFragmentDirections.toSearch())
     }
 }

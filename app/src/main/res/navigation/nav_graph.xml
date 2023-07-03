@@ -9,6 +9,14 @@
     <fragment
         android:id="@+id/navigation_users"
         android:name="com.example.mydroidgitexp.ui.users.UsersFragment"
-        android:label="UsersFragment" />
+        android:label="UsersFragment" >
+        <action
+            android:id="@+id/to_search"
+            app:destination="@id/navigation_search" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.mydroidgitexp.ui.search.SearchFragment"
+        android:label="SearchFragment" />
 
 </navigation>
