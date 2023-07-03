@@ -9,8 +9,10 @@ import com.skydoves.bindables.BindingViewModel
 import com.skydoves.bindables.asBindingProperty
 import com.skydoves.bindables.bindingProperty
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,19 +29,27 @@ class SearchViewModel @Inject constructor(
     var toastMessage: String? by bindingProperty(null)
         private set
 
+    private val textQuery: MutableStateFlow<String> = MutableStateFlow("")
     private val userFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-    private val userListFlow = userFetchingIndex.flatMapLatest { page ->
-        mainRepository.fetchSearchUserList(
-            // TODO: pass here query from search edit text ui
-            query = "abc",
-            page = page,
-            onStart = { isLoading = true },
-            onComplete = { isLoading = false },
-            onError = {
-                toastMessage = it
-                Timber.d(it)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val userListFlow =
+        userFetchingIndex.flatMapLatest { page ->
+        textQuery.flatMapLatest { query ->
+            if (query.isBlank()) {
+                flowOf(emptyList())
+            } else {
+                mainRepository.fetchSearchUserList(
+                    query = query,
+                    page = page,
+                    onStart = { isLoading = true },
+                    onComplete = { isLoading = false },
+                    onError = {
+                        toastMessage = it
+                        Timber.d(it)
+                    }
+                )
             }
-        )
+        }
     }
 
     @get:Bindable
@@ -47,6 +57,14 @@ class SearchViewModel @Inject constructor(
 
     init {
         Timber.d("Init SearchViewModel")
+    }
+
+    fun onSearchQueryChanged(query: String) {
+        val newQuery = query.trim().takeIf { it.length >= 2 } ?: ""
+        if (textQuery.value != newQuery) {
+            textQuery.value = newQuery
+            userFetchingIndex.value = 0
+        }
     }
 
     @MainThread

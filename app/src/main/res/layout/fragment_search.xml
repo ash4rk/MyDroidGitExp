@@ -33,6 +33,29 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="?android:dividerHorizontal"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:showDividers="middle"
+                android:baselineAligned="false">
+
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:iconifiedByDefault="false"
+                    android:imeOptions="actionDone|flagNoExtractUi"
+                    android:queryBackground="@color/transparent"
+                    android:queryHint="@string/search_schedule_hint"
+                    android:searchHintIcon="@null"
+                    android:searchIcon="@null">
+                </SearchView>
+            </LinearLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
