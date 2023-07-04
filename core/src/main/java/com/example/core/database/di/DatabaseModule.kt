@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.core.database.SearchUserDao
 import com.example.core.database.UserDao
 import com.example.core.database.UserDatabase
+import com.example.core.database.UserInfoDao
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -42,9 +43,15 @@ internal object DatabaseModule {
         return appDatabase.userDao()
     }
 
-    @Provides
+  @Provides
     @Singleton
     fun provideSearchUserDao(appDatabase: UserDatabase): SearchUserDao {
         return appDatabase.searchUserDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserInfoDao(appDatabase: UserDatabase): UserInfoDao {
+        return appDatabase.userInfoDao()
     }
 }

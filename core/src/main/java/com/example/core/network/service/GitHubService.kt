@@ -1,9 +1,11 @@
 package com.example.core.network.service
 
 import com.example.core.model.User
+import com.example.core.model.UserInfo
 import com.example.core.network.model.SearchUserResponse
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface  GitHubService {
@@ -14,7 +16,6 @@ interface  GitHubService {
         @Query("per_page") per_page: Int = 30
     ): ApiResponse<List<User>>
 
-
     @GET("/search/users")
     suspend fun fetchSearchUserList(
         @Query("q") query: String = "",
@@ -23,5 +24,8 @@ interface  GitHubService {
         @Query("per_page") per_page: Int = 30,
         @Query("page") page: Int = 1
     ): ApiResponse<SearchUserResponse>
+
+    @GET("users/{name}")
+    suspend fun fetchUserInfo(@Path("name") name: String): ApiResponse<UserInfo>
 
 }
