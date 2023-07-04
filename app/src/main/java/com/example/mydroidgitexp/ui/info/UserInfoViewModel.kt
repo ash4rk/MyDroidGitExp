@@ -1,20 +1,24 @@
 package com.example.mydroidgitexp.ui.info
 
 import androidx.databinding.Bindable
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.repository.InfoRepository
 import com.example.core.model.UserInfo
 import com.skydoves.bindables.BindingViewModel
 import com.skydoves.bindables.asBindingProperty
 import com.skydoves.bindables.bindingProperty
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import javax.inject.Inject
 
-@HiltViewModel
-class UserInfoViewModel @Inject constructor(
-    private val infoRepository: InfoRepository
+class UserInfoViewModel @AssistedInject constructor(
+    private val infoRepository: InfoRepository,
+    @Assisted private val userName: String
 ) : BindingViewModel() {
 
     @get:Bindable
@@ -26,7 +30,7 @@ class UserInfoViewModel @Inject constructor(
         private set
 
     private val userInfoFlow: Flow<UserInfo?> = infoRepository.fetchUserInfo(
-        name = "ash4rk",
+        name = userName,
         onComplete = { isLoading = false },
         onError = {
             toastMessage = it
@@ -34,12 +38,28 @@ class UserInfoViewModel @Inject constructor(
         }
     )
 
-
     @get:Bindable
-    val userList: UserInfo? by userInfoFlow.asBindingProperty(viewModelScope, null)
+    val userInfo: UserInfo? by userInfoFlow.asBindingProperty(viewModelScope, null)
 
     init {
         Timber.d("Init SearchViewModel")
     }
 
+    @dagger.assisted.AssistedFactory
+    interface AssistedFactory {
+        fun create(userName: String): UserInfoViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            assistedFactory: AssistedFactory,
+            userName: String
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return assistedFactory.create(userName) as T
+            }
+        }
+    }
 }
