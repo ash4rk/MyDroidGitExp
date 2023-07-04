@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.mydroidgitexp.R
 import com.example.mydroidgitexp.adapters.UserAdapter
 import com.example.mydroidgitexp.databinding.FragmentSearchBinding
@@ -26,8 +27,16 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
             vm = viewModel
         }
         binding.toolbar.run {
-            // TODO: inflate search menu
-
+            inflateMenu(R.menu.search_menu)
+            setOnMenuItemClickListener { item ->
+                if (item.itemId == R.id.back) {
+                    Timber.d("Navigate to Users")
+                    backToUsers()
+                    true
+                } else {
+                    false
+                }
+            }
         }
 
         binding.searchView.apply {
@@ -66,8 +75,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         ViewCompat.getWindowInsetsController(view)?.hide(WindowInsetsCompat.Type.ime())
     }
 
-    private fun openUsers() {
-        // TODO: navigate to UsersFragment
-        //findNavController().navigate(SearchFragmentDirections.toUsers())
+    private fun backToUsers() {
+        findNavController().popBackStack()
     }
 }
