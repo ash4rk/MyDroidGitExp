@@ -10,7 +10,7 @@ import com.skydoves.bindables.BindingListAdapter
 import com.skydoves.bindables.binding
 import timber.log.Timber
 
-class UserAdapter : BindingListAdapter<User, UserAdapter.UserViewHolder>(diffUtil) {
+class UserAdapter(private val onUserClickListener: OnUserClickListener) : BindingListAdapter<User, UserAdapter.UserViewHolder>(diffUtil) {
 
     private var onClickedAt = 0L
 
@@ -27,6 +27,11 @@ class UserAdapter : BindingListAdapter<User, UserAdapter.UserViewHolder>(diffUti
         init {
             binding.root.setOnClickListener {
                 Timber.d("Clicked at: $onClickedAt")
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val user = getItem(position)
+                    onUserClickListener.openUserInfo(user)
+                }
             }
         }
 
@@ -46,4 +51,8 @@ class UserAdapter : BindingListAdapter<User, UserAdapter.UserViewHolder>(diffUti
                 oldItem == newItem
         }
     }
+}
+
+interface OnUserClickListener {
+    fun openUserInfo(user: User)
 }

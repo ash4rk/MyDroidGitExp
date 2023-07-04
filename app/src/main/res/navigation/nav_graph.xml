@@ -13,10 +13,27 @@
         <action
             android:id="@+id/to_search"
             app:destination="@id/navigation_search" />
+        <action
+            android:id="@+id/action_navigation_users_to_userInfoFragment"
+            app:destination="@id/userInfoFragment">
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.mydroidgitexp.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_navigation_search_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.mydroidgitexp.ui.info.UserInfoFragment"
+        android:label="UserInfoFragment" >
+        <argument android:name="user"
+            app:argType="com.example.core.model.User" />
+    </fragment>
 
 </navigation>

@@ -6,16 +6,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.core.model.User
 import com.example.mydroidgitexp.R
+import com.example.mydroidgitexp.adapters.OnUserClickListener
 import com.example.mydroidgitexp.adapters.UserAdapter
 import com.example.mydroidgitexp.databinding.FragmentSearchBinding
-import com.google.android.material.search.SearchView
 import com.skydoves.bindables.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
+class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search),
+    OnUserClickListener {
 
     private val viewModel: SearchViewModel by viewModels()
 
@@ -23,7 +25,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
 
         binding {
-            adapter = UserAdapter()
+            adapter = UserAdapter(this@SearchFragment)
             vm = viewModel
         }
         binding.toolbar.run {
@@ -77,5 +79,10 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
 
     private fun backToUsers() {
         findNavController().popBackStack()
+    }
+
+    override fun openUserInfo(user: User) {
+        val action = SearchFragmentDirections.actionNavigationSearchToUserInfoFragment(user)
+        findNavController().navigate(action)
     }
 }
