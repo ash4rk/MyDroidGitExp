@@ -80,7 +80,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             app:paginationSearchUserList="@{vm}"
-            app:spanCount="1"
+            app:spanCount="4"
             app:submitList="@{vm.userList}"
             app:toast="@{vm.toastMessage}"
             tools:listitem="@layout/item_user" />
