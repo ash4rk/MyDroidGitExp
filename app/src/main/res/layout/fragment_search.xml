@@ -38,7 +38,6 @@
                 android:layout_height="match_parent"
                 android:divider="?android:dividerHorizontal"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 android:showDividers="middle"
                 android:baselineAligned="false">
 
