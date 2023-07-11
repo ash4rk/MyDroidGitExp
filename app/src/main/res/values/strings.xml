@@ -4,4 +4,13 @@
     <string name="search_user">Search user</string>
     <string name="search_schedule_hint">Search for a user </string>
     <string name="back">Back</string>
+    <string name="repositories">Repositories:</string>
+    <string name="followers">Followers:</string>
+    <string name="gists">Public Gists:</string>
+    <string name="following">Following:</string>
+    <string name="login">Login:</string>
+    <string name="company">Company:</string>
+    <string name="blog">Blog:</string>
+    <string name="location">Location:</string>
+    <string name="created_at">Created at:</string>
 </resources>

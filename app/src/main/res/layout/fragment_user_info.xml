@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.example.mydroidgitexp.ui.info.UserInfoViewModel" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,75 +16,164 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:text="@{vm.userInfo.name}"
-                android:textColor="@color/white"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:text="@{String.valueOf(vm.userInfo.public_repos)}"
-                android:textColor="@color/white"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"/>
-
-
-        </LinearLayout>
-
-
-
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:gone="@{!vm.loading &amp;&amp; true}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:fitsSystemWindows="true">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:scaleType="center"
+                    android:layout_gravity="center_horizontal"
+                    app:paletteImage="@{vm.userInfo.avatarUrl}"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:text="@{vm.userInfo.name}"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    tools:text="Ash4rk" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:textAlignment="center"
+                        android:text='@{@string/repositories + " " + String.valueOf(vm.userInfo.public_repos)}'
+                        android:clickable="false"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="8dp"
+                        tools:text="Repositories: 10"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:textAlignment="center"
+                        android:text='@{@string/followers + " " + String.valueOf(vm.userInfo.followers)}'
+                        android:clickable="false"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        tools:text="Followers: 2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:textAlignment="center"
+                        android:text='@{@string/gists + " " + String.valueOf(vm.userInfo.public_gists)}'
+                        android:clickable="false"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="8dp"
+                        tools:text="Public Gists: 10"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:textAlignment="center"
+                        android:text='@{@string/following + " " + String.valueOf(vm.userInfo.following)}'
+                        android:clickable="false"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        tools:text="Following: 2"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/login + " " + String.valueOf(vm.userInfo.login)}'
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="Login: ash4rk"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/company + " " + String.valueOf(vm.userInfo.company)}'
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="Company: Google"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/blog + " " + String.valueOf(vm.userInfo.blog)}'
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="Blog: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/location + " " + String.valueOf(vm.userInfo.location)}'
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="Location: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/created_at + " " + String.valueOf(vm.userInfo.created_at)}'
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="Created at: "/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:gone="@{!vm.loading &amp;&amp; true}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
