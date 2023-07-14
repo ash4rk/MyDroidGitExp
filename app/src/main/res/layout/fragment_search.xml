@@ -9,11 +9,11 @@
 
         <variable
             name="vm"
-            type="com.example.mydroidgitexp.ui.search.SearchViewModel" />
+            type="com.ash4rk.githubscout.ui.search.SearchViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.mydroidgitexp.adapters.UserAdapter" />
+            type="com.ash4rk.githubscout.adapters.UserAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

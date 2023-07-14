@@ -8,17 +8,17 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mydroidgitexp"
+    namespace = "com.ash4rk.githubscout"
 
     compileSdk = Configuration.COMPILE_SDK
     defaultConfig {
-        applicationId = "com.example.mydroidgitexp"
+        applicationId = "com.ash4rk.githubscout"
         minSdk = Configuration.MIN_SDK
         targetSdk = Configuration.TARGET_SDK
         versionCode = Configuration.VERSION_CODE
         versionName = Configuration.VERSION_NAME
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner = "com.example.mydroidgitexp.AppTestRunner"
+        testInstrumentationRunner = "com.ash4rk.githubscout.AppTestRunner"
     }
 
     compileOptions {

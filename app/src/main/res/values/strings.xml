@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyDroidGitExp</string>
+    <string name="app_name">GitHubScout</string>
     <string name="greetings">Greetings!!</string>
     <string name="search_user">Search user</string>
     <string name="search_schedule_hint">Search for a user </string>

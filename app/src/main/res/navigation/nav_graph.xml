@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_users"
-        android:name="com.example.mydroidgitexp.ui.users.UsersFragment"
+        android:name="com.ash4rk.githubscout.ui.users.UsersFragment"
         android:label="UsersFragment" >
         <action
             android:id="@+id/to_search"
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.mydroidgitexp.ui.search.SearchFragment"
+        android:name="com.ash4rk.githubscout.ui.search.SearchFragment"
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_navigation_search_to_userInfoFragment"
@@ -30,10 +30,10 @@
 
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.example.mydroidgitexp.ui.info.UserInfoFragment"
+        android:name="com.ash4rk.githubscout.ui.info.UserInfoFragment"
         android:label="UserInfoFragment" >
         <argument android:name="user"
-            app:argType="com.example.core.model.User" />
+            app:argType="com.ash4rk.core.model.User" />
     </fragment>
 
 </navigation>

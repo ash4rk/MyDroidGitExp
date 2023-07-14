@@ -7,7 +7,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.mydroidgitexp.ui.info.UserInfoViewModel" />
+            type="com.ash4rk.githubscout.ui.info.UserInfoViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.mydroidgitexp">
+    package="com.ash4rk.githubscout">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyDroidGitExp"
+        android:theme="@style/Theme.GitHubScout"
         android:name = ".GitHubApp">
 
         <activity
@@ -27,12 +27,12 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.mydroidgitexp.androidx-startup"
+            android:authorities="com.ash4rk.githubscout.androidx-startup"
             android:exported="false"
             tools:node="merge">
 
             <meta-data
-                android:name="com.example.mydroidgitexp.initializer.TimberInitializer"
+                android:name="com.ash4rk.githubscout.initializer.TimberInitializer"
                 android:value="androidx.startup" />
         </provider>
 

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.example.mydroidgitexp.ui.main.MainViewModel" />
+            type="com.ash4rk.githubscout.ui.main.MainViewModel" />
 
     </data>
 
@@ -30,7 +30,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
-            android:name="com.example.mydroidgitexp.ui.main.DispatchInsetsNavHostFragment"
+            android:name="com.ash4rk.githubscout.ui.main.DispatchInsetsNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"

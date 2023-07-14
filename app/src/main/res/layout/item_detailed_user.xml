@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="com.example.core.model.UserInfo" />
+            type="com.ash4rk.core.model.UserInfo" />
 
     </data>
 

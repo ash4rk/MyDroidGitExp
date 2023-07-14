@@ -9,7 +9,7 @@ plugins {
 
 android {
 
-    namespace = "com.example.mydroidgitexp.core"
+    namespace = "com.ash4rk.githubscout.core"
     compileSdk = Configuration.COMPILE_SDK
 
     defaultConfig {

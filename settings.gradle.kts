@@ -17,6 +17,6 @@ dependencyResolutionManagement {
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
-rootProject.name = "MyDroidGitExp"
+rootProject.name = "GitHubScout"
 include(":app")
 include(":core")
